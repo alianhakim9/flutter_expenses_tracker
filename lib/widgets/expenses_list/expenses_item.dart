@@ -39,14 +39,14 @@ class ExpensesItem extends StatelessWidget {
                 // const Spacer(),
                 Row(
                   children: [
-                    const Icon(
-                      Icons.alarm,
+                    Icon(
+                      categoryIcons[expense.category],
                     ),
                     const SizedBox(
                       width: 8,
                     ),
                     Text(
-                      expense.date.toString(),
+                      expense.formattedDate,
                     ),
                   ],
                 ),

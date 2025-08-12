@@ -23,8 +23,8 @@ class ExpensesItem extends StatelessWidget {
           children: [
             Text(
               expense.title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+              style: Theme.of(ctx).textTheme.titleLarge!.copyWith(
+                fontSize: 16,
               ),
             ),
             const SizedBox(

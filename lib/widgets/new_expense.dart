@@ -126,7 +126,7 @@ class _NewExpenseState extends State<NewExpense> {
                   ),
                   IconButton(
                     onPressed: _presentDatePicker,
-                    icon: Icon(Icons.calendar_month),
+                    icon: const Icon(Icons.calendar_month),
                   ),
                 ],
               ),

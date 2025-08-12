@@ -19,6 +19,14 @@ class ExpensesList extends StatelessWidget {
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (ctx, index) => Dismissible(
+        background: Container(
+          color: Theme.of(ctx).colorScheme.error.withValues(
+            alpha: .75,
+          ),
+          margin: EdgeInsets.symmetric(
+            horizontal: Theme.of(ctx).cardTheme.margin!.horizontal,
+          ),
+        ),
         key: ValueKey(
           expenses[index].id,
         ),

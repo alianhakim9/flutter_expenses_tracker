@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
@@ -34,6 +35,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       builder: (ctx) => NewExpense(
         onAddExpanse: _addExpense,
@@ -60,7 +62,7 @@ class _ExpensesState extends State<Expenses> {
       context,
     ).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 4),
+        duration: const Duration(seconds: 4),
         content: const Text(
           'Expense deleted.',
           // style: TextStyle(
@@ -82,6 +84,9 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+    final width = mq.size.width;
+
     Widget mainContent = const Center(
       child: Text('No Expenses found. Start adding some!'),
     );
@@ -107,16 +112,30 @@ class _ExpensesState extends State<Expenses> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Chart(
-            expenses: _regiresteredExpenses,
-          ),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(
+                  expenses: _regiresteredExpenses,
+                ),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Chart(
+                    expenses: _regiresteredExpenses,
+                  ),
+                ),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            ),
     );
   }
 }
